@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>AES Encryption/Decryption Tool</h1>
+    <h2>Encrypt</h2>
+    <textarea id="encryptInput" rows="4" placeholder="Enter text to encrypt"></textarea>
+    <input type="text" id="encryptKey" placeholder="Enter encryption key">
+    <button onclick="encryptText()">Encrypt</button>
+    <textarea id="encryptOutput" rows="4" readonly placeholder="Encrypted text will appear here"></textarea>
+    
+    <h2>Decrypt</h2>
+    <textarea id="decryptInput" rows="4" placeholder="Enter text to decrypt"></textarea>
+    <input type="text" id="decryptKey" placeholder="Enter decryption key">
+    <button onclick="decryptText()">Decrypt</button>
+    <textarea id="decryptOutput" rows="4" readonly placeholder="Decrypted text will appear here"></textarea>
+    
+    <script>
+        function encryptText() {
+            var text = document.getElementById('encryptInput').value;
+            var key = document.getElementById('encryptKey').value;
+            var encrypted = CryptoJS.AES.encrypt(text, key).toString();
+            document.getElementById('encryptOutput').value = encrypted;
+        }
+
+        function decryptText() {
+            var text = document.getElementById('decryptInput').value;
+            var key = document.getElementById('decryptKey').value;
+            var decrypted = CryptoJS.AES.decrypt(text, key);
+            var plaintext = decrypted.toString(CryptoJS.enc.Utf8);
+            document.getElementById('decryptOutput').value = plaintext;
+        }
+    </script>
+</body>
+</html>
